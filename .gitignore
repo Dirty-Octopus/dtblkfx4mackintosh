@@ -1,0 +1,67 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Xcode and Swift build products
+build/
+DerivedData/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcscmblueprint
+
+# C/C++ and audio-plugin build products
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+compile_commands.json
+*.o
+*.obj
+*.a
+*.dylib
+*.so
+*.dll
+*.vst
+*.vst3
+*.component
+*.au
+*.clap
+
+# Package managers and tooling
+.cache/
+.ccache/
+.conan/
+.deps/
+node_modules/
+vendor/
+
+# Coverage, profiling, and local test output
+coverage/
+*.gcda
+*.gcno
+*.profraw
+*.profdata
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.mobileprovision
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Generated archives and release output
+dist/
+artifacts/
+*.zip
+*.tar
+*.tar.gz
