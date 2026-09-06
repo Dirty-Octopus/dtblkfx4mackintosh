@@ -6,7 +6,23 @@ The port targets functional and visual parity with the upstream plugin, includin
 
 ## Repository status
 
-The repository is currently initialized for development and project coordination. The plugin implementation has not yet been ported in this initialization commit.
+The repository is initialized for development and project coordination. This phase provides the ignored upstream-reference workflow, dependency manifest, arm64 CMake scaffolding, environment check, and project layout. The plugin implementation has not yet been ported.
+
+## Quick start
+
+```sh
+./scripts/check-build-environment.sh
+cmake --preset macos-arm64
+cmake --build --preset macos-arm64
+```
+
+To fetch the upstream reference after network access is available:
+
+```sh
+./scripts/fetch-upstream.sh
+```
+
+The checkout is created at `.references/DtBlkFx`, which is ignored and is never included in commits. See [`docs/BUILD_ENVIRONMENT.md`](docs/BUILD_ENVIRONMENT.md), [`docs/DEPENDENCIES.md`](docs/DEPENDENCIES.md), and [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md) for the binding workflow.
 
 ## Upstream
 
@@ -22,4 +38,3 @@ The repository is currently initialized for development and project coordination
 ## License
 
 See [`LICENSE`](LICENSE). Upstream copyright and license notices must be preserved when upstream code or assets are incorporated.
-

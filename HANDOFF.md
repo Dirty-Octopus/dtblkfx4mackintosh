@@ -3,9 +3,9 @@
 ## Current Status / 当前状态
 
 - **Date / 日期**: 2026-09-06
-- **Phase / 阶段**: Repository initialization / 仓库初始化
-- **Branch / 分支**: Git initialization pending; sandbox blocked `.git` creation / Git 初始化待完成；沙箱阻止创建 `.git`
-- **Implementation / 实现**: No plugin code; no build system / 尚无插件代码与构建系统
+- **Phase / 阶段**: Build and dependency scaffolding / 编译与依赖脚手架
+- **Branch / 分支**: `main`, tracking `origin/main`; initial commit `a83a3ca` / `main`，跟踪 `origin/main`；初始提交 `a83a3ca`
+- **Implementation / 实现**: No plugin code; CMake scaffolding is available / 尚无插件代码；CMake 脚手架已建立
 - **Upstream / 上游**: `https://codeberg.org/skullzy/DtBlkFx.git`
 - **Remote target / 远程目标**: `https://github.com/Dirty-Octopus/dtblkfx4mackintosh.git`
 - **License intent / 许可证意图**: Preserve and comply with GNU GPLv3 / 保留并遵循 GNU GPLv3
@@ -20,26 +20,31 @@
 
 ## Not Completed / 未完成
 
-1. `.gitignore`, `README.md`, and `LICENSE` are present. Git repository initialization, initial commit, and remote push remain pending because the sandbox currently blocks `.git` metadata creation.
-2. Upstream source inspection and license verification remain pending because Codeberg DNS/network access was unavailable during this handoff.
-3. Plugin implementation, build system, FFTW integration, GUI recreation, algorithm verification, tests, packaging, and signing have not started.
+1. Git repository initialized on `main`; initial commit `a83a3ca` is pushed and tracks `origin/main`.
+2. `.gitignore`, `README.md`, `LICENSE`, CMake presets, environment checks, dependency records, upstream fetch script, and project structure documents are present.
+3. Upstream snapshot was fetched at `1506e444702d0da0f28fb3b813b88019e5a1dbc0`; libpng and zlib submodules are initialized at `78d28c6b9663d52465a3f6d15e21a995729ba410` and `abf180a067223611620dd97dd5681df7c7fa7c9b`.
+4. Homebrew dependencies from `Brewfile` are installed: CMake 4.4.3, FFTW 3.3.11, and pkgconf 3.0.7.
+5. Plugin implementation, FFTW linkage in a plugin target, GUI recreation, algorithm verification, tests, packaging, and signing have not started.
 
 ## Verification Evidence / 验证证据
 
 - The working directory was empty before these documents were created.
-- `git status` reported that the directory was not yet a Git repository.
-- `git ls-remote https://codeberg.org/skullzy/DtBlkFx.git` failed with a DNS resolution error (`Could not resolve host: codeberg.org`).
-- `git init -b main` was attempted; the sandbox denied `.git` metadata creation (`Operation not permitted`). An escalated retry was rejected by the automatic approval service with HTTP 503 before execution.
-- `.gitignore` was reviewed and corrected so source `Makefile` files remain trackable; no credentials, personal paths, or private keys were found by repository scan.
-- No upstream source files were copied or inferred as implementation.
+- `git status --short --branch` reports `main...origin/main` before this change.
+- `scripts/fetch-upstream.sh` and `git clone` completed successfully; `git -C .references/DtBlkFx rev-parse HEAD` reports `1506e444702d0da0f28fb3b813b88019e5a1dbc0`.
+- `git -C .references/DtBlkFx submodule status` reports the pinned libpng and zlib revisions above.
+- `./scripts/check-build-environment.sh` passes on `arm64` with Apple Clang, CMake, Make, `xcrun`, the macOS SDK, and pkg-config.
+- `pkg-config --modversion fftw3` reports `3.3.11`; CMake FFTW discovery has been verified with the optional flag.
+- `cmake --preset macos-arm64 -DDTBLKFX_ENABLE_FFTW=ON` and `cmake --build --preset macos-arm64` complete successfully; plugin targets remain disabled.
+- Upstream license inspection confirms GPLv3 for DtBlkFx, the FFTW license files under `fftw/`, and permissive notice/license files for the initialized libpng and zlib submodules.
+- `cmake --preset macos-arm64` and `cmake --build --preset macos-arm64` complete successfully with plugin targets disabled.
+- `git check-ignore -v .references .references/DtBlkFx` confirms the reference path is ignored; repository scans found no credentials or personal paths.
 
 ## Next Agent Actions / 下一代理行动
 
 1. Read `AGENTS.md`, `RULES.md`, and this file before acting.
-2. Initialize Git, create a privacy-conscious `.gitignore`, inspect the staged diff, and make the initial commit.
-3. Configure only the specified GitHub remote and push the intended branch after confirming credentials and remote state.
-4. When network access is available, pin the upstream revision, inspect GPLv3 notices and build metadata, and record provenance before implementation.
-5. Keep this document current after every material change, including commands and verification results.
+2. Keep `scripts/fetch-upstream.sh` pinned to the verified upstream revision unless a new revision is explicitly reviewed and recorded.
+3. Test `DTBLKFX_ENABLE_FFTW` explicitly, then inspect upstream single-precision FFTW linkage before writing plugin targets.
+4. Add implementation under `src/`, tests under `tests/`, and evidence under `docs/`; update this file after each material change.
 
 ## Handoff Contract / 交接约定
 

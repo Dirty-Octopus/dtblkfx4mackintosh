@@ -30,6 +30,7 @@ compile_commands.json
 *.clap
 
 # Package managers and tooling
+.references/
 .cache/
 .ccache/
 .conan/
