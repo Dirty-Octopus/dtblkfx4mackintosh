@@ -18,8 +18,8 @@ The upstream repository was fetched successfully on 2026-09-06 at the pinned rev
 
 2026-09-06 已成功拉取上游仓库并固定为上述 revision。上游副本仍在 Git 管理目录之外；本仓库未复制任何上游源码、资源或许可证文件。
 
-The snapshot contains the upstream GPLv3 license, FFTW source and headers under `fftw/`, VST 2.x SDK sources under `vstsdk/`, VSTGUI sources under `vstgui/`, and a Visual Studio solution under `projects/`. The original build metadata targets Windows (`.sln`/`.vcxproj`), so a macOS build system must be designed from verified source facts rather than copied project files.
+The snapshot contains the upstream GPLv3 license, FFTW source and headers under `fftw/`, a placeholder note for the absent VST 2.x SDK under `vstsdk/`, VSTGUI sources under `vstgui/`, and a Visual Studio solution under `projects/`. The original build metadata targets Windows (`.sln`/`.vcxproj`), so a macOS build system must be designed from verified source facts rather than copied project files. See [`UPSTREAM_AUDIT.md`](UPSTREAM_AUDIT.md) for the source-level evidence and blockers.
 
-该快照包含上游 GPLv3 许可证、`fftw/` 下的 FFTW 源码与头文件、`vstsdk/` 下的 VST 2.x SDK 源码、`vstgui/` 下的 VSTGUI 源码，以及 `projects/` 下的 Visual Studio 解决方案。原始构建元数据面向 Windows（`.sln`/`.vcxproj`），因此 macOS 构建系统必须依据已核验的源码事实重新设计，不得直接复制项目文件。
+该快照包含上游 GPLv3 许可证、`fftw/` 下的 FFTW 源码与头文件、`vstsdk/` 下仅有关于缺失 SDK 的占位说明、`vstgui/` 下的 VSTGUI 源码，以及 `projects/` 下的 Visual Studio 解决方案。原始构建元数据面向 Windows（`.sln`/`.vcxproj`），因此 macOS 构建系统必须依据已核验的源码事实重新设计，不得直接复制项目文件。源码证据与阻塞项见 [`UPSTREAM_AUDIT.md`](UPSTREAM_AUDIT.md)。
 
 成功拉取后，必须先在此记录输出 revision 以及上游许可证和构建元数据，再新增实现文件。

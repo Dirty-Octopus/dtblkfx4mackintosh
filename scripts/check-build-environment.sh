@@ -31,8 +31,13 @@ fi
 
 if command -v pkg-config >/dev/null 2>&1; then
   printf 'pkg-config:     %s\n' "$(pkg-config --version)"
+  if pkg-config --exists fftw3f; then
+    printf 'FFTW3f:         %s (%s)\n' "$(pkg-config --modversion fftw3f)" "$(pkg-config --libs fftw3f)"
+  else
+    printf '%s\n' 'FFTW3f:         not found (required only when DTBLKFX_ENABLE_FFTW=ON)'
+  fi
 else
-  printf '%s\n' 'pkg-config:     not installed (optional until FFTW3 is enabled)'
+  printf '%s\n' 'pkg-config:     not installed (optional until FFTW3f is enabled)'
 fi
 
 if [ "$(uname -m)" != "arm64" ]; then

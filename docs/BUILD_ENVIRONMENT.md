@@ -12,9 +12,9 @@ Required tools:
 - Apple Clang (`clang`).
 - CMake 3.24 or newer.
 - Make, or another generator supported by CMake.
-- FFTW3 and `pkg-config` when enabling the verified FFTW configuration.
+- FFTW3 single-precision (`fftw3f`) and `pkg-config` when enabling the verified FFTW configuration.
 
-Run `scripts/check-build-environment.sh` before configuring. It reports missing tools and the active SDK. `pkg-config` is optional while FFTW3 integration is disabled.
+Run `scripts/check-build-environment.sh` before configuring. It reports missing tools and the active SDK. `pkg-config` is optional while FFTW3f integration is disabled.
 
 ## Configure and build scaffolding / 配置与构建脚手架
 
@@ -35,4 +35,4 @@ cmake --preset macos-arm64 -DDTBLKFX_ENABLE_FFTW=ON
 cmake --build --preset macos-arm64
 ```
 
-The current upstream uses single-precision FFTW (`fftwf_*` symbols). The discovery check only verifies the system FFTW3 package is visible; it does not claim that the plugin port is complete.
+The current upstream uses single-precision FFTW (`fftwf_*` symbols). The discovery check must resolve the `fftw3f` package and `libfftw3f`; resolving only the double-precision `fftw3` package is insufficient. This check does not claim that the plugin port is complete.

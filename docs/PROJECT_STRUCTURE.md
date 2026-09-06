@@ -18,7 +18,14 @@ The layout separates tracked project metadata, build scaffolding, source code, t
 ├── docs/                      # Build, dependency, provenance, and design records
 ├── scripts/                   # Reproducible maintenance and environment commands
 ├── src/                       # Ported plugin implementation (future phase)
+│   ├── plugin/                # VST entry point and host adapter
+│   ├── dsp/                   # FFT, effects, parameters, and state
+│   ├── gui/                   # Platform-neutral visual model and controls
+│   └── platform/mac/          # macOS bundle, window, and resource adapter
 ├── tests/                     # DSP/UI/host regression tests (future phase)
+│   ├── dsp/                   # Numeric reference and regression tests
+│   ├── gui/                   # Screenshot and interaction checks
+│   └── host/                  # Lifecycle, chunk, and channel-contract checks
 ├── resources/                 # Verified plugin resources (future phase)
 └── .references/               # Local upstream checkout; always ignored by Git
 ```
@@ -29,6 +36,7 @@ Rules:
 2. Keep the upstream checkout only at `.references/DtBlkFx`; never copy it wholesale into `src/`.
 3. Put implementation in `src/`, tests in `tests/`, and evidence or decisions in `docs/`.
 4. Record every new external dependency and its license in `docs/DEPENDENCIES.md`.
+5. Use the planned `src/` and `tests/` subdirectories defined above; do not create parallel ownership roots.
 
 规则：
 
@@ -36,3 +44,4 @@ Rules:
 2. 上游副本只能放在 `.references/DtBlkFx`；不得整体复制到 `src/`。
 3. 实现放在 `src/`，测试放在 `tests/`，证据和决策放在 `docs/`。
 4. 每个新增外部依赖及其许可证必须记录在 `docs/DEPENDENCIES.md`。
+5. 使用上列规划的 `src/` 与 `tests/` 子目录；不得创建平行的职责根目录。
