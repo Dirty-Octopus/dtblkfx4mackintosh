@@ -66,3 +66,9 @@ artifacts/
 *.zip
 *.tar
 *.tar.gz
+
+# Local agent instructions
+AGENTS.md
+RULES.md
+agents.md
+rules.md

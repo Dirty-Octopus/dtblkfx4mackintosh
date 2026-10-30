@@ -61,3 +61,13 @@
 Each agent must leave the tree buildable or clearly state why it is not, avoid unrelated changes, preserve user changes, and report blockers with reproducible evidence. No agent may claim one-to-one GUI or algorithm fidelity before it has comparative evidence against the pinned upstream revision.
 
 每个 agent 必须使工作树保持可复核状态，或明确说明不可复核原因；不得引入无关改动；必须保留用户改动并以可复现证据记录阻塞因素。未针对固定上游版本完成对比验证，不得宣称 GUI 或算法已一比一复刻。
+
+
+## Repository history cleanup / 仓库历史清理 — 2026-10-30
+
+- User explicitly authorized rewriting and overwriting remote history to remove agent and rules files.
+- Removed AGENTS.md and RULES.md (including lowercase variants) from every published commit and added ignore rules. Local instruction files remain local.
+- Risk: rewritten commit IDs require collaborators to synchronize their checkouts before pushing.
+- Recovery: an offline local Git bundle preserves the pre-rewrite refs; restore only with explicit authorization because it would republish removed files.
+- Verification: inspect every rewritten commit tree for these filenames and verify the remote main revision after a force push guarded by the previously observed revision.
+- Scope: existing remote main history only; unpublished worktree branches are not published or changed.
